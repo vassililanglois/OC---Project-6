@@ -16,6 +16,7 @@ header {
 h1 {
   color: #901c1c;
   margin-right: 100px;
+  font-weight: 300;
 }
 
 .logo {
@@ -30,6 +31,8 @@ h1 {
   margin-top: 100px;
 }
 
+/***** Article *****/
+
 .photographer_section article {
   justify-self: center;
   display: flex;
@@ -37,10 +40,26 @@ h1 {
   align-items: center;
   flex-direction: column;
 }
+.photographer_section article a {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 200ms ease-in-out;
+}
+
+.photographer_section article a:hover {
+  transform: scale(1.05);
+}
 
 .photographer_section article h2 {
   color: #d3573c;
-  font-size: 36px;
+  font-size: 2.25rem;
+  font-weight: 300;
+  margin: 0;
+  margin-top: 0.626rem;
 }
 
 .photographer_section article img {
@@ -49,4 +68,30 @@ h1 {
   border-radius: 50%;
   object-fit: cover;
   overflow-clip-margin: unset;
+}
+
+.location {
+  color: #901c1c;
+  font-size: 0.8125rem;
+  font-weight: 300;
+  margin: 0.125rem;
+}
+
+.tagline {
+  font-size: 0.625rem;
+  font-weight: 300;
+  margin: 0.125rem;
+}
+
+.price {
+  font-size: 0.5625rem;
+  color: #757575;
+  font-weight: 300;
+  margin: 0.125rem;
+}
+
+@media (max-width: 768px) {
+  .photographer_section {
+    grid-template-columns: 1fr 1fr;
+  }
 }
