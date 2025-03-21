@@ -4,10 +4,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (photographerId) {
     try {
-      const photographer = await getPhotographerInfos(photographerId);
+      const { photographer, media } = await getPhotographerInfos(
+        photographerId
+      );
       if (photographer) {
         console.log("Photographe trouvé:", photographer);
+        console.log("Médias trouvés", media);
         displayPhotographerData(photographer);
+        displayPhotographerMedias(media, photographer); // Affiche les médias
       } else {
         console.error("Photographe non trouvé");
       }
@@ -26,8 +30,11 @@ async function getPhotographerInfos(id) {
   try {
     const response = await fetch("../data/photographers.json");
     const data = await response.json();
+
     const photographer = data.photographers.find((p) => p.id == id);
-    return photographer;
+    const media = data.media.filter((m) => m.photographerId == id); // Filtrer les médias du photographe
+
+    return { photographer, media }; // Retourne un objet contenant les deux
   } catch (error) {
     console.error(
       "Erreur lors de la récupération des informations du photographe:",
@@ -72,6 +79,42 @@ function displayPhotographerData(photographer) {
 
   // Ajout de l'image à ".emplacement-portrait"
   emplacementPortrait.appendChild(img);
+}
+
+function displayPhotographerMedias(media, photographer) {
+  const mediaContainer = document.querySelector(".media-container"); // Conteneur où afficher les médias
+  const photographerName = photographer.name.replace(/ /g, "-");
+
+  media.forEach((item) => {
+    const mediaElement = document.createElement("div");
+    mediaElement.classList.add("media-item");
+
+    if (item.image) {
+      const img = document.createElement("img");
+      img.src = `../assets/media/${photographerName}/${item.image}`;
+      console.log(img.src);
+      img.alt = item.title;
+      mediaElement.appendChild(img);
+    } else if (item.video) {
+      const video = document.createElement("video");
+      video.src = `../assets/media/${photographerName}/${item.video}`;
+      video.controls = true;
+      mediaElement.appendChild(video);
+    }
+
+    const title = document.createElement("p");
+    title.textContent = item.title;
+    title.classList.add("media-title");
+
+    const likes = document.createElement("p");
+    likes.textContent = `${item.likes} ❤`;
+    likes.classList.add("media-likes");
+
+    mediaElement.appendChild(title);
+    mediaElement.appendChild(likes);
+
+    mediaContainer.appendChild(mediaElement);
+  });
 }
 
 const dropdownMenu = document.querySelector(".dropdown-menu");
