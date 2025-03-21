@@ -1,76 +1,205 @@
+body {
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 43px 0px;
+}
+
+h1 {
+  color: #901c1c;
+  margin-right: 100px;
+  font-weight: 300;
+}
+
+.logo {
+  height: 50px;
+  margin-left: 100px;
+}
+
 #contact_modal {
-    display: none;
+  display: none;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact_button:hover {
+  background-color: #db8876;
+  color: black;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+}
+
+/***** Header photgraphe *****/
+
+.photographe-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.photographe-info h2 {
+  font-size: 4rem;
+  color: #d3573c;
+  font-weight: 300;
+  margin: 0;
+  margin-top: 0.626rem;
+}
+
+.emplacement-portrait img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow-clip-margin: unset;
+}
+
+.photographe-info .location {
+  color: #901c1c;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 0.8rem;
+}
+
+.photographe-info .tagline {
+  font-size: 1.125rem;
+  font-weight: 300;
+  margin: 0;
+  color: #525252;
+}
+
+/***** Filters *****/
+
+.filters {
+  margin: 10px 100px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.filters .trier-par {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.dropdown-menu {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: white;
+  padding: 0;
+  width: 170px;
+  height: 100%;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+svg {
+  width: 32px;
+}
+
+.other {
+  height: 3rem;
+  display: none;
+  border-top: solid 1px white;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem;
+}
+
+.sort {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem;
+}
+
+.arrow {
+  transition: transform 100ms ease-in-out;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
 }

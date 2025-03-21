@@ -1,5 +1,5 @@
 function photographerTemplate(data) {
-  const { name, portrait, city, country, tagline, price } = data;
+  const { name, portrait, city, country, tagline, price, id } = data;
 
   const picture = `assets/photographers/${portrait}`;
 
@@ -37,7 +37,7 @@ function photographerTemplate(data) {
     // Lien vers "photographer.html"
 
     const photographersLink = document.createElement("a");
-    photographersLink.href = "photographer.html";
+    photographersLink.href = `photographer.html?id=${id}`;
     photographersLink.ariaLabel = `Lien vers la page du photographe ${name}`;
 
     // Ajout des éléments au lien vers "photographer.html"

@@ -10,7 +10,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  margin: 43px 0px;
 }
 
 h1 {
@@ -74,7 +74,7 @@ h1 {
   color: #901c1c;
   font-size: 0.8125rem;
   font-weight: 300;
-  margin: 0.125rem;
+  margin: 0;
 }
 
 .tagline {
@@ -90,7 +90,7 @@ h1 {
   margin: 0.125rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .photographer_section {
     grid-template-columns: 1fr 1fr;
   }
