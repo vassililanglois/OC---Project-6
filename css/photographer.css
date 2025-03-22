@@ -1,15 +1,12 @@
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
+  position: relative;
 }
 
 img,
 video,
 canvas {
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
-  overflow-clip-margin: unset;
   overflow: hidden;
 }
 
@@ -191,6 +188,7 @@ svg {
 
 .other {
   height: 3rem;
+  position: relative;
   display: none;
   border-top: solid 1px white;
   align-items: center;
@@ -212,4 +210,79 @@ svg {
 
 .arrow.rotate {
   transform: rotate(180deg);
+}
+
+/***** Medias *****/
+
+.media-container {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 6%;
+  grid-row-gap: 1%;
+  margin-top: 35px;
+  margin-bottom: 100px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.media-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+
+.media-item img,
+.media-item video {
+  object-fit: cover;
+  aspect-ratio: 7/6;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.media-infos {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #901c1c;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.likes-container {
+  display: flex;
+  align-items: center;
+}
+
+.ri-heart-fill:hover {
+  color: #db8876;
+}
+
+/***** Likes and price *****/
+
+.likes-and-price {
+  position: fixed;
+  z-index: 99;
+  bottom: 0;
+  right: 50px;
+  height: 60px;
+  width: 300px;
+  background-color: #db8876;
+  color: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 1.5rem;
+  align-items: center;
+}
+
+.total-likes {
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
