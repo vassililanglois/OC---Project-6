@@ -215,7 +215,7 @@ form textarea {
   width: 200px;
   border-radius: 50%;
   object-fit: cover;
-  /* overflow-clip-margin: unset;*/
+  overflow-clip-margin: unset;
 }
 
 .photographe-info .location {
@@ -430,7 +430,8 @@ svg {
   width: 3rem;
 }
 
-.lightbox-arrow {
+.left-arrow,
+.right-arrow {
   width: 4rem;
 }
 

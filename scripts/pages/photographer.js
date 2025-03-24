@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log("Médias trouvés", media);
         displayPhotographerData(photographer);
         displayPhotographerMedias(media, photographer); // Affiche les médias
-        addLightboxEvents();
+        addLightboxEvents(media, photographer);
       } else {
         console.error("Photographe non trouvé");
       }
@@ -27,26 +27,88 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function addLightboxEvents() {
+function addLightboxEvents(media, photographer) {
   const lightbox = document.querySelector(".lightbox-container");
   const mediaItems = document.querySelectorAll(
     ".media-item img, .media-item video"
   );
+  const currentMedia = document.getElementById("current-media");
+  const currentMediaTitle = document.querySelector(".lightbox-media-title");
 
-  console.log("Médias détectés :", mediaItems); // Vérifier que les médias existent
+  let currentIndex = 0;
 
-  mediaItems.forEach((item) => {
+  // Boucle pour ajouter un attribut data-index à chaque média
+  mediaItems.forEach((item, index) => {
+    item.setAttribute("data-index", index); // Ajouter un attribut data-index
+
     item.addEventListener("click", () => {
-      lightbox.style.display = "flex";
-      console.log("Image cliquée !");
+      currentIndex = index; // Mettre à jour l'index du média actuellement affiché
+      lightbox.style.display = "flex"; // Afficher la lightbox
+
+      // Mettre à jour l'image actuelle dans la lightbox
+      currentMedia.src = item.src;
+      currentMedia.alt = `Photo nommée : ${item.alt}`;
+      currentMediaTitle.textContent = item.alt;
     });
   });
 
-  function closeLightbox() {
-    lightbox.style.display = "none";
+  // Gestion des flèches gauche et droite
+  document.querySelector(".right-arrow").addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % media.length; // Passer à l'image suivante
+    updateLightboxMedia(
+      photographer,
+      media,
+      currentIndex,
+      currentMedia,
+      currentMediaTitle
+    ); // Mettre à jour l'image affichée
+  });
+
+  document.querySelector(".left-arrow").addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + media.length) % media.length; // Passer à l'image précédente
+    updateLightboxMedia(
+      photographer,
+      media,
+      currentIndex,
+      currentMedia,
+      currentMediaTitle
+    ); // Mettre à jour l'image affichée
+  });
+}
+
+// Fonction pour mettre à jour l'image ou la vidéo dans la lightbox
+function updateLightboxMedia(
+  photographer,
+  media,
+  currentIndex,
+  currentMedia,
+  currentMediaTitle
+) {
+  if (!photographer || !photographer.name) {
+    console.error("Photographer object is not defined or missing 'name'");
+    return; // Sortir de la fonction si l'objet photographer est invalide
+  }
+  // Récupérer le nom du photographe et remplacer les espaces par des tirets
+  const photographerName = photographer.name.replace(/ /g, "-");
+
+  // Récupérer l'élément du tableau media selon currentIndex
+  const currentItem = media[currentIndex];
+
+  // Vérifier si l'élément actuel est une image ou une vidéo
+  if (currentItem.image) {
+    // Construire le chemin pour l'image en utilisant le nom du photographe
+    currentMedia.src = `../assets/media/${photographerName}/${currentItem.image}`;
+    currentMedia.alt = `Photo nommée : ${currentItem.title}`;
+    currentMediaTitle.textContent = currentItem.title;
+  } else if (currentItem.video) {
+    // Construire le chemin pour la vidéo en utilisant le nom du photographe
+    currentMedia.src = `../assets/media/${photographerName}/${currentItem.video}`;
+    currentMedia.alt = `Vidéo nommée : ${currentItem.title}`;
+    currentMediaTitle.textContent = currentItem.title;
   }
 }
 
+// Fermer la lightbox
 function closeLightbox() {
   const lightbox = document.querySelector(".lightbox-container");
   lightbox.style.display = "none";
