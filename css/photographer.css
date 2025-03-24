@@ -33,16 +33,6 @@ h1 {
   display: none;
 }
 
-.photograph-header {
-  background-color: #fafafa;
-  height: 300px;
-  margin: 0 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 3rem;
-}
-
 .contact_button {
   font-size: 1.25rem;
   font-weight: 500;
@@ -117,6 +107,23 @@ form input {
 
 /***** Header photgraphe *****/
 
+.photograph-header {
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
+  display: grid;
+  align-items: center;
+  padding: 0 3rem;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.photograph-header-element {
+  display: flex;
+  justify-content: center;
+}
+
 .photographe-info {
   height: 100%;
   display: flex;
@@ -186,6 +193,10 @@ svg {
   width: 32px;
 }
 
+.current {
+  display: flex;
+}
+
 .other {
   height: 3rem;
   position: relative;
@@ -194,6 +205,7 @@ svg {
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem;
+  display: flex;
 }
 
 .sort {

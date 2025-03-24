@@ -153,6 +153,12 @@ const dropdownMenu = document.querySelector(".dropdown-menu");
 const others = document.querySelectorAll(".other");
 const arrow = document.querySelector(".arrow"); // Vérifie bien que l'élément a cette classe
 
+document.addEventListener("DOMContentLoaded", async () => {
+  others.forEach((element) => {
+    element.style.display = "none";
+  });
+});
+
 dropdownMenu.addEventListener("click", () => {
   others.forEach((element) => {
     element.style.display = element.style.display === "flex" ? "none" : "flex";

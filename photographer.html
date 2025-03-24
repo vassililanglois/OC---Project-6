@@ -35,13 +35,15 @@
     <main id="main">
       <section class="photograph-header">
         <div
-          class="photographe-info"
+          class="photographe-info photograph-header-element"
           aria-label="Informations du photographe"
         ></div>
-        <button class="contact_button" onclick="displayModal()">
-          Contactez-moi
-        </button>
-        <div class="emplacement-portrait"></div>
+        <div class="photograph-header-element">
+          <button class="contact_button" onclick="displayModal()">
+            Contactez-moi
+          </button>
+        </div>
+        <div class="emplacement-portrait photograph-header-element"></div>
       </section>
       <section class="filters">
         <p class="trier-par">Trier par</p>
@@ -59,10 +61,10 @@
               ></path>
             </svg>
           </div>
-          <div class="sort other">
+          <div class="other sort">
             <p class="sort2">Date</p>
           </div>
-          <div class="sort other">
+          <div class="other sort">
             <p class="sort3">Titre</p>
           </div>
         </div>
