@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log("Médias trouvés", media);
         displayPhotographerData(photographer);
         displayPhotographerMedias(media, photographer); // Affiche les médias
+        addLightboxEvents();
       } else {
         console.error("Photographe non trouvé");
       }
@@ -25,6 +26,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Aucun ID de photographe trouvé dans l'URL");
   }
 });
+
+function addLightboxEvents() {
+  const lightbox = document.querySelector(".lightbox-container");
+  const mediaItems = document.querySelectorAll(
+    ".media-item img, .media-item video"
+  );
+
+  console.log("Médias détectés :", mediaItems); // Vérifier que les médias existent
+
+  mediaItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      console.log("Image cliquée !");
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+  }
+}
+
+function closeLightbox() {
+  const lightbox = document.querySelector(".lightbox-container");
+  lightbox.style.display = "none";
+}
 
 async function getPhotographerInfos(id) {
   try {
@@ -103,13 +129,12 @@ function displayPhotographerMedias(media, photographer) {
     if (item.image) {
       const img = document.createElement("img");
       img.src = `../assets/media/${photographerName}/${item.image}`;
-      console.log(img.src);
+      //console.log(img.src);
       img.alt = item.title;
       mediaElement.appendChild(img);
     } else if (item.video) {
       const video = document.createElement("video");
       video.src = `../assets/media/${photographerName}/${item.video}`;
-      video.controls = true;
       mediaElement.appendChild(video);
     }
 

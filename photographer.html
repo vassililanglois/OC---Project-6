@@ -18,67 +18,6 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <div id="contact_modal">
-      <div class="modal">
-        <header role="Présentation du photgraphe et bouton de contact">
-          <h2>
-            Contactez-moi <br />
-            <span class="contact-name"></span>
-          </h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form action="#" method="post" aria-labelledby="form-title">
-          <fieldset>
-            <legend id="form-title">Formulaire de contact</legend>
-
-            <!-- Prénom -->
-            <label for="prenom">Prénom</label>
-            <input
-              type="text"
-              id="prenom"
-              name="prenom"
-              autocomplete="given-name"
-              required
-              aria-required="true"
-            />
-
-            <!-- Nom -->
-            <label for="nom">Nom</label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              autocomplete="family-name"
-              required
-              aria-required="true"
-            />
-
-            <!-- Email -->
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              autocomplete="email"
-              required
-              aria-required="true"
-            />
-
-            <!-- Message -->
-            <label for="message">Votre message</label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              aria-required="true"
-            ></textarea>
-
-            <!-- Bouton d'envoi -->
-            <button class="contact_button">Envoyer</button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
     <div class="likes-and-price">
       <div class="total-likes">
         <p class="total-number">107</p>
@@ -133,6 +72,97 @@
         </div>
       </section>
       <section class="media-container"></section>
+      <div id="contact_modal">
+        <div class="modal">
+          <header role="Présentation du photgraphe et bouton de contact">
+            <h2>
+              Contactez-moi <br />
+              <span class="contact-name"></span>
+            </h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" />
+          </header>
+          <form action="#" method="post" aria-labelledby="form-title">
+            <fieldset>
+              <legend id="form-title">Formulaire de contact</legend>
+
+              <!-- Prénom -->
+              <label for="prenom">Prénom</label>
+              <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                autocomplete="given-name"
+                required
+                aria-required="true"
+              />
+
+              <!-- Nom -->
+              <label for="nom">Nom</label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                autocomplete="family-name"
+                required
+                aria-required="true"
+              />
+
+              <!-- Email -->
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+
+              <!-- Message -->
+              <label for="message">Votre message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                aria-required="true"
+              ></textarea>
+
+              <!-- Bouton d'envoi -->
+              <button class="send_button">Envoyer</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="lightbox-container">
+        <div class="lightbox">
+          <img
+            class="cross"
+            src="assets/icons/close-large-line.svg"
+            onclick="closeLightbox()"
+          />
+          <img
+            class="lightbox-arrow"
+            src="assets/icons/arrow-left-s-line.svg"
+            onclick=""
+          />
+          <div class="lightbox-media">
+            <div class="img-container">
+              <img
+                src="/assets/media/Marcel-Nikolic/Architecture_Contrast.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <p class="lightbox-media-title">Arc en ciel</p>
+            </div>
+          </div>
+          <img
+            class="lightbox-arrow"
+            src="assets/icons/arrow-right-s-line.svg"
+            onclick=""
+          />
+        </div>
+      </div>
     </main>
 
     <script src="/scripts/pages/photographer.js"></script>
