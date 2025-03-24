@@ -176,17 +176,26 @@ form input {
   font-size: 1.125rem;
 }
 
+.dropdown-menu-container {
+  display: flex;
+  position: relative;
+  min-width: 170px;
+  min-height: 68px;
+}
+
 .dropdown-menu {
   font-size: 1.25rem;
   font-weight: 400;
   color: white;
-  padding: 0;
+  padding-left: 10px;
+  padding-right: 10px;
   width: 170px;
-  height: 100%;
+  height: fit-content;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  position: absolute;
 }
 
 svg {
