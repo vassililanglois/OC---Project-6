@@ -34,31 +34,36 @@ function addLightboxEvents(media, photographer) {
   );
   const currentMedia = document.getElementById("current-media");
   const currentMediaVideo = document.getElementById("current-media-video");
-
   const currentMediaTitle = document.querySelector(".lightbox-media-title");
 
   let currentIndex = 0;
 
-  // Boucle pour ajouter un attribut data-index à chaque média
   mediaItems.forEach((item, index) => {
     item.addEventListener("click", () => {
-      currentIndex = index; // Mettre à jour l'index du média actuellement affiché
-      lightbox.style.display = "flex"; // Afficher la lightbox
+      currentIndex = index;
+      lightbox.style.display = "flex";
 
-      // Mettre à jour l'image actuelle dans la lightbox
-      currentMedia.src = item.src;
-      currentMedia.alt = `Photo nommée : ${item.alt}`;
-      currentMediaTitle.textContent = item.alt;
+      const currentItem = media[currentIndex]; // Récupérer les données du média
 
-      currentMediaVideo.src = item.src;
-      currentMediaVideo.alt = `Vidéo nommée : ${item.alt}`;
-      currentMediaTitle.textContent = item.alt;
+      if (item.tagName === "IMG") {
+        currentMedia.style.display = "block";
+        currentMediaVideo.style.display = "none";
+        currentMedia.src = item.src;
+        currentMedia.alt = `Photo nommée : ${currentItem.title}`; // Utiliser title de media[]
+        currentMediaTitle.textContent = currentItem.title;
+      } else if (item.tagName === "VIDEO") {
+        currentMedia.style.display = "none";
+        currentMediaVideo.style.display = "block";
+        currentMediaVideo.controls = true;
+        currentMediaVideo.src = item.src;
+        currentMediaVideo.alt = `Vidéo nommée : ${currentItem.title}`; // Utiliser title de media[]
+        currentMediaTitle.textContent = currentItem.title;
+      }
     });
   });
 
-  // Gestion des flèches gauche et droite
   document.querySelector(".right-arrow").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % media.length; // Passer à l'image suivante
+    currentIndex = (currentIndex + 1) % media.length;
     updateLightboxMedia(
       photographer,
       media,
@@ -66,11 +71,11 @@ function addLightboxEvents(media, photographer) {
       currentMedia,
       currentMediaVideo,
       currentMediaTitle
-    ); // Mettre à jour l'image affichée
+    );
   });
 
   document.querySelector(".left-arrow").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + media.length) % media.length; // Passer à l'image précédente
+    currentIndex = (currentIndex - 1 + media.length) % media.length;
     updateLightboxMedia(
       photographer,
       media,
@@ -78,7 +83,7 @@ function addLightboxEvents(media, photographer) {
       currentMedia,
       currentMediaVideo,
       currentMediaTitle
-    ); // Mettre à jour l'image affichée
+    );
   });
 }
 
