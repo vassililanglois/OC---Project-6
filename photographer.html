@@ -18,6 +18,67 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
+    <div id="contact_modal">
+      <div class="modal">
+        <header role="Présentation du photgraphe et bouton de contact">
+          <h2>
+            Contactez-moi <br />
+            <span class="contact-name"></span>
+          </h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" />
+        </header>
+        <form action="#" method="post" aria-labelledby="form-title">
+          <fieldset>
+            <legend id="form-title">Formulaire de contact</legend>
+
+            <!-- Prénom -->
+            <label for="prenom">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              autocomplete="given-name"
+              required
+              aria-required="true"
+            />
+
+            <!-- Nom -->
+            <label for="nom">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              autocomplete="family-name"
+              required
+              aria-required="true"
+            />
+
+            <!-- Email -->
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-required="true"
+            />
+
+            <!-- Message -->
+            <label for="message">Votre message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              aria-required="true"
+            ></textarea>
+
+            <!-- Bouton d'envoi -->
+            <button class="contact_button">Envoyer</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
     <div class="likes-and-price">
       <div class="total-likes">
         <p class="total-number">107</p>
@@ -73,21 +134,7 @@
       </section>
       <section class="media-container"></section>
     </main>
-    <div id="contact_modal">
-      <div class="modal">
-        <header role="Présentation du photgraphe et bouton de contact">
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
-          </div>
-          <button class="contact_button">Envoyer</button>
-        </form>
-      </div>
-    </div>
+
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>

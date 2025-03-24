@@ -49,6 +49,10 @@ function displayPhotographerData(photographer) {
   // Mettre à jour les éléments de la page avec les données du photographe
   const photographeInfo = document.querySelector(".photographe-info");
   const emplacementPortrait = document.querySelector(".emplacement-portrait");
+  const contactName = document.querySelector(".contact-name");
+
+  // Modale
+  contactName.textContent = name;
 
   // Name
   const h2 = document.createElement("h2");
