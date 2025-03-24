@@ -418,7 +418,8 @@ svg {
   height: 100%;
 }
 
-.img-container img {
+.img-container img,
+.img-container video {
   height: 100%;
   width: 100%;
   object-fit: contain;

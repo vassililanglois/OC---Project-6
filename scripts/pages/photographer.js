@@ -33,14 +33,14 @@ function addLightboxEvents(media, photographer) {
     ".media-item img, .media-item video"
   );
   const currentMedia = document.getElementById("current-media");
+  const currentMediaVideo = document.getElementById("current-media-video");
+
   const currentMediaTitle = document.querySelector(".lightbox-media-title");
 
   let currentIndex = 0;
 
   // Boucle pour ajouter un attribut data-index à chaque média
   mediaItems.forEach((item, index) => {
-    item.setAttribute("data-index", index); // Ajouter un attribut data-index
-
     item.addEventListener("click", () => {
       currentIndex = index; // Mettre à jour l'index du média actuellement affiché
       lightbox.style.display = "flex"; // Afficher la lightbox
@@ -48,6 +48,10 @@ function addLightboxEvents(media, photographer) {
       // Mettre à jour l'image actuelle dans la lightbox
       currentMedia.src = item.src;
       currentMedia.alt = `Photo nommée : ${item.alt}`;
+      currentMediaTitle.textContent = item.alt;
+
+      currentMediaVideo.src = item.src;
+      currentMediaVideo.alt = `Vidéo nommée : ${item.alt}`;
       currentMediaTitle.textContent = item.alt;
     });
   });
@@ -60,6 +64,7 @@ function addLightboxEvents(media, photographer) {
       media,
       currentIndex,
       currentMedia,
+      currentMediaVideo,
       currentMediaTitle
     ); // Mettre à jour l'image affichée
   });
@@ -71,6 +76,7 @@ function addLightboxEvents(media, photographer) {
       media,
       currentIndex,
       currentMedia,
+      currentMediaVideo,
       currentMediaTitle
     ); // Mettre à jour l'image affichée
   });
@@ -82,6 +88,7 @@ function updateLightboxMedia(
   media,
   currentIndex,
   currentMedia,
+  currentMediaVideo,
   currentMediaTitle
 ) {
   if (!photographer || !photographer.name) {
@@ -97,13 +104,18 @@ function updateLightboxMedia(
   // Vérifier si l'élément actuel est une image ou une vidéo
   if (currentItem.image) {
     // Construire le chemin pour l'image en utilisant le nom du photographe
+    currentMedia.style.display = "block";
+    currentMediaVideo.style.display = "none";
     currentMedia.src = `../assets/media/${photographerName}/${currentItem.image}`;
     currentMedia.alt = `Photo nommée : ${currentItem.title}`;
     currentMediaTitle.textContent = currentItem.title;
   } else if (currentItem.video) {
     // Construire le chemin pour la vidéo en utilisant le nom du photographe
-    currentMedia.src = `../assets/media/${photographerName}/${currentItem.video}`;
-    currentMedia.alt = `Vidéo nommée : ${currentItem.title}`;
+    currentMedia.style.display = "none";
+    currentMediaVideo.style.display = "block";
+    currentMediaVideo.controls = true;
+    currentMediaVideo.src = `../assets/media/${photographerName}/${currentItem.video}`;
+    currentMediaVideo.alt = `Vidéo nommée : ${currentItem.title}`;
     currentMediaTitle.textContent = currentItem.title;
   }
 }
