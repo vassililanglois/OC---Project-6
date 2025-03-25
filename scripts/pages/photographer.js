@@ -94,6 +94,23 @@ dropdownOptions.forEach((option) => {
   });
 });
 
+// Fonction pour empecher que les click sur le dropdown-menu ouvre la vidéo
+
+const dropdownMenu = document.querySelector(".dropdown-menu");
+const videos = document.querySelectorAll(".media-container video");
+
+dropdownMenu.addEventListener("click", () => {
+  const isOpen = dropdownMenu.classList.toggle("open"); // Ajoute/enlève une classe "open"
+
+  videos.forEach((video) => {
+    if (isOpen) {
+      video.classList.add("video-under-dropdown");
+    } else {
+      video.classList.remove("video-under-dropdown");
+    }
+  });
+});
+
 // Fonction pour ajouter les événements de la lightbox
 function addLightboxEvents(media, photographer) {
   const lightbox = document.querySelector(".lightbox-container");
@@ -300,7 +317,6 @@ function displayPhotographerMedias(media, photographer) {
 }
 
 // Gestion de l'affichage du menu déroulant
-const dropdownMenu = document.querySelector(".dropdown-menu");
 const others = document.querySelectorAll(".other");
 const arrow = document.querySelector(".arrow");
 
