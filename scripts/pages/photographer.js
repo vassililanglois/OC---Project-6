@@ -191,7 +191,7 @@ function displayPhotographerData(photographer) {
 }
 
 function displayPhotographerMedias(media, photographer) {
-  const mediaContainer = document.querySelector(".media-container"); // Conteneur où afficher les médias
+  const mediaContainer = document.querySelector(".media-container");
   const photographerName = photographer.name.replace(/ /g, "-");
   const photographerPrice = document.querySelector(".photographer-price");
 
@@ -203,12 +203,9 @@ function displayPhotographerMedias(media, photographer) {
     const mediaElement = document.createElement("div");
     mediaElement.classList.add("media-item");
 
-    // Images et vidéos
-
     if (item.image) {
       const img = document.createElement("img");
       img.src = `../assets/media/${photographerName}/${item.image}`;
-      //console.log(img.src);
       img.alt = item.title;
       mediaElement.appendChild(img);
     } else if (item.video) {
@@ -217,40 +214,48 @@ function displayPhotographerMedias(media, photographer) {
       mediaElement.appendChild(video);
     }
 
-    // Infos du média
-
     const infos = document.createElement("div");
     infos.classList.add("media-infos");
-
-    // Titre
 
     const title = document.createElement("p");
     title.textContent = item.title;
     title.classList.add("media-title");
 
-    // Partie Likes
-
-    const likesContainer = document.createElement("div");
-    likesContainer.classList.add("likes-container");
-
-    const likes = document.createElement("p");
-    likes.textContent = item.likes;
-    likes.classList.add("media-likes");
-
     const heart = document.createElement("i");
     heart.classList.add("ri-heart-fill");
 
-    // Répartitition dans les différents containers
+    const likes = document.createElement("p");
+    const likesContainer = document.createElement("div");
 
-    infos.appendChild(title);
+    let liked = false;
+    likes.textContent = item.likes;
+    totalLikes += item.likes;
+
+    heart.addEventListener("click", () => {
+      if (liked) {
+        likes.textContent = parseInt(likes.textContent) - 1;
+        totalLikes -= 1;
+        heart.classList.remove("liked");
+      } else {
+        likes.textContent = parseInt(likes.textContent) + 1;
+        totalLikes += 1;
+        heart.classList.add("liked");
+      }
+      liked = !liked;
+
+      // Met à jour l'affichage du total des likes
+      document.querySelector(".total-number").textContent = totalLikes;
+    });
+
+    likesContainer.classList.add("likes-container");
+    likes.classList.add("media-likes");
+
     likesContainer.appendChild(likes);
     likesContainer.appendChild(heart);
+    infos.appendChild(title);
     infos.appendChild(likesContainer);
     mediaElement.appendChild(infos);
-
     mediaContainer.appendChild(mediaElement);
-
-    totalLikes += item.likes;
   });
 
   const totalNumber = document.querySelector(".total-number");
@@ -296,3 +301,38 @@ document.querySelectorAll(".sort").forEach((sortItem) => {
     }
   });
 });
+
+const dropdownOptions = document.querySelectorAll(".sort"); // Sélectionne les options
+const dropdownText = document.querySelector(".sort-text"); // Texte affiché du dropdown
+
+dropdownOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    const selectedText = option.textContent.trim(); // Récupère le texte cliqué
+    dropdownText.textContent = selectedText; // Met à jour le texte affiché
+
+    // Applique le tri en fonction du texte sélectionné
+    if (selectedText === "Popularité") {
+      sortMediasByLikes();
+    } else if (selectedText === "Date") {
+      sortMediasByDate();
+    } else if (selectedText === "Titre") {
+      sortMediasByTitle();
+    }
+  });
+});
+
+// Fonctions de tri (exemples)
+function sortMediasByLikes() {
+  media.sort((a, b) => b.likes - a.likes);
+  displayPhotographerMedias(media, photographer);
+}
+
+function sortMediasByDate() {
+  media.sort((a, b) => new Date(b.date) - new Date(a.date));
+  displayPhotographerMedias(media, photographer);
+}
+
+function sortMediasByTitle() {
+  media.sort((a, b) => a.title.localeCompare(b.title));
+  displayPhotographerMedias(media, photographer);
+}

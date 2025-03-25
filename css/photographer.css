@@ -348,7 +348,7 @@ svg {
   align-items: center;
 }
 
-.ri-heart-fill:hover {
+.liked {
   color: #db8876;
 }
 
