@@ -63,7 +63,6 @@ function updateMediaDisplay() {
 
 // Sélection des éléments
 const dropdownOptions = document.querySelectorAll(".sort");
-const dropdownText = document.querySelector(".current .sort-text");
 
 // Ajout d'un écouteur d'événement sur chaque option de tri
 dropdownOptions.forEach((option) => {
@@ -195,6 +194,9 @@ function updateLightboxMedia(
 }
 
 // Fonction pour fermer la lightbox
+const close = document.querySelector(".cross");
+close.addEventListener("click", closeLightbox);
+
 function closeLightbox() {
   const lightbox = document.querySelector(".lightbox-container");
   lightbox.style.display = "none";

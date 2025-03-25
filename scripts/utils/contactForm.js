@@ -1,7 +1,13 @@
+const contactButton = document.querySelector(".contact_button");
+contactButton.addEventListener("click", displayModal);
+
 function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
 }
+
+const closeButton = document.querySelector(".close_button");
+closeButton.addEventListener("click", closeModal);
 
 function closeModal() {
   const modal = document.getElementById("contact_modal");

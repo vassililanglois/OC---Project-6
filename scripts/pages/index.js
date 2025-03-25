@@ -1,3 +1,5 @@
+import { photographerTemplate } from "../templates/photographer.js";
+
 async function getPhotographers() {
   // Récupération des pièces depuis le fichier JSON
   const reponse = await fetch("../data/photographers.json");
