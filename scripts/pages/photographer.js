@@ -61,16 +61,29 @@ function updateMediaDisplay() {
   addLightboxEvents(media, photographer); // Réajoute les événements pour la lightbox
 }
 
-// Gérer les clics sur les options de tri
+// Sélection des éléments
 const dropdownOptions = document.querySelectorAll(".sort");
-const dropdownText = document.querySelector(".sort-text");
+const dropdownText = document.querySelector(".current .sort-text");
 
+// Ajout d'un écouteur d'événement sur chaque option de tri
 dropdownOptions.forEach((option) => {
   option.addEventListener("click", () => {
-    const selectedText = option.textContent.trim();
-    dropdownText.textContent = selectedText;
+    // Vérifier si l'option cliquée est déjà sélectionnée (class current)
+    if (option.classList.contains("current")) {
+      return; // Ne rien faire si l'option actuelle est cliquée
+    }
 
-    // Choix du tri en fonction du texte sélectionné
+    // Sélection de l'option actuelle et de son texte
+    const currentOption = document.querySelector(".current");
+    const currentText = currentOption.querySelector(".sort-text");
+
+    // Échanger les textes entre l'option cliquée et l'option actuelle
+    const tempText = currentText.textContent;
+    currentText.textContent = option.querySelector(".sort-text").textContent;
+    option.querySelector(".sort-text").textContent = tempText;
+
+    // Appliquer le tri en fonction du nouveau texte affiché
+    const selectedText = currentText.textContent.trim();
     if (selectedText === "Popularité") {
       sortMediasByLikes();
     } else if (selectedText === "Date") {
