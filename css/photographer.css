@@ -20,6 +20,11 @@ input {
   height: 170px;
 }
 
+button {
+  border: none;
+  background: none;
+}
+
 html,
 body {
   padding: 0;
@@ -81,10 +86,12 @@ h1 {
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 100ms ease-in-out;
 }
 .contact_button:hover {
   background-color: #db8876;
   color: black;
+  transform: scale(1.05);
 }
 
 .send_button {
@@ -202,7 +209,7 @@ form textarea {
   justify-content: center;
 }
 
-.photographe-info h2 {
+.photographe-info h1 {
   font-size: 4rem;
   color: #d3573c;
   font-weight: 300;
@@ -271,6 +278,11 @@ form textarea {
   cursor: pointer;
   position: absolute;
   z-index: 10;
+  transition: transform 100ms ease-in-out;
+}
+
+.dropdown-menu:hover {
+  transform: scale(1.05);
 }
 
 svg {
@@ -285,17 +297,23 @@ svg {
   height: 3rem;
   position: relative;
   display: none;
-  border-top: solid 1px white;
+  border-top: solid 1px white !important;
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem;
 }
 
 .sort {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
   height: 4rem;
   align-items: center;
   justify-content: space-between;
   padding: 0.625rem;
+  width: 100%;
+  border: none;
+  background-color: #901c1c;
 }
 
 .arrow {
@@ -325,6 +343,11 @@ svg {
   flex-direction: column;
   align-items: center;
   gap: 0px;
+  transition: transform 200ms ease-in-out;
+}
+
+.media-item:hover {
+  transform: scale(1.05);
 }
 
 .media-item img,
@@ -372,6 +395,11 @@ svg {
   padding-right: 30px;
   font-size: 1.5rem;
   align-items: center;
+  transition: transform 100ms ease-in-out;
+}
+
+.likes-and-price:hover {
+  transform: scale(1.05);
 }
 
 .total-likes {
@@ -387,6 +415,7 @@ svg {
   height: 100%;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .lightbox .cross {
@@ -428,12 +457,14 @@ svg {
 
 .cross {
   position: absolute;
+  top: 0;
   right: 0;
   width: 3rem;
 }
 
 .left-arrow,
 .right-arrow {
+  height: fit-content;
   width: 4rem;
 }
 

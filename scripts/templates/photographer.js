@@ -5,11 +5,13 @@ export function photographerTemplate(data) {
 
   function getUserCardDOM() {
     const article = document.createElement("article");
+    article.setAttribute("aria-label", `Aller sur le profil de ${name}`);
 
     // Image
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("alt", `Portrait de ${name}`);
+    img.setAttribute("role", "img");
 
     // Nom
     const h2 = document.createElement("h2");

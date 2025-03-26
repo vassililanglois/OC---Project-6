@@ -13,12 +13,21 @@
     <title>Fisheye</title>
   </head>
   <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+    <header role="banner">
+      <img
+        src="assets/images/logo.png"
+        class="logo"
+        role="img"
+        aria-hidden="true"
+      />
       <h1>Nos photographes</h1>
     </header>
-    <main id="main">
-      <div class="photographer_section"></div>
+    <main id="main" role="Contenu principal">
+      <div
+        aria-label="Profils des photographes"
+        role="region"
+        class="photographer_section"
+      ></div>
     </main>
     <script type="module" src="scripts/pages/index.js"></script>
   </body>

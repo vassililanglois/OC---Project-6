@@ -18,7 +18,10 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <div class="likes-and-price">
+    <div
+      class="likes-and-price"
+      aria-roledescription="Total de likes du phtographes et prix à la journée"
+    >
       <div class="total-likes">
         <p class="total-number">107</p>
         <i class="ri-heart-fill"></i>
@@ -27,27 +30,46 @@
         <p class="photographer-price"></p>
       </div>
     </div>
-    <header>
-      <a href="index.html" aria-label="Lien vers la page d'accueil">
+    <header role="banner">
+      <a
+        href="index.html"
+        role="link"
+        aria-label="Lien vers la page d'accueil"
+        aria-hidden="false"
+        class="home-link"
+      >
         <img src="assets/images/logo.png" class="logo" alt="Logo Fisheye" />
       </a>
     </header>
-    <main id="main">
-      <section class="photograph-header">
+    <main id="main" role="main">
+      <section class="photograph-header" role="banner">
         <div
           class="photographe-info photograph-header-element"
           aria-label="Informations du photographe"
         ></div>
         <div class="photograph-header-element">
-          <button class="contact_button">Contactez-moi</button>
+          <button class="contact_button" role="banner" aria-hidden="false">
+            Contactez-moi
+          </button>
         </div>
         <div class="emplacement-portrait photograph-header-element"></div>
       </section>
       <section class="filters">
         <p class="trier-par">Trier par</p>
         <div class="dropdown-menu-container">
-          <div class="dropdown-menu">
-            <div class="sort current">
+          <div
+            class="dropdown-menu"
+            role="listbox"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <button
+              class="sort current"
+              role="button"
+              aria-sort="descending"
+              aria-label="Trier par popularité décroissante"
+              aria-hidden="false"
+            >
               <p class="sort-text">Popularité</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,27 +81,48 @@
                   d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"
                 ></path>
               </svg>
-            </div>
-            <div class="other sort">
+            </button>
+            <button
+              class="sort other"
+              role="button"
+              aria-sort="descending"
+              aria-label="Trier par date décroissante"
+              aria-hidden="false"
+            >
               <p class="sort-text">Date</p>
-            </div>
-            <div class="other sort">
+            </button>
+            <button
+              class="sort other"
+              role="button"
+              aria-sort="ascending"
+              aria-label="Trier par titre par ordre alphabétique"
+              aria-hidden="false"
+            >
               <p class="sort-text">Titre</p>
-            </div>
+            </button>
           </div>
         </div>
       </section>
       <section class="media-container"></section>
       <div id="contact_modal">
-        <div class="modal">
+        <div class="modal" aria-modal="true" role="dialog">
           <header role="Présentation du photgraphe et bouton de contact">
             <h2>
               Contactez-moi <br />
               <span class="contact-name"></span>
             </h2>
-            <img class="close_button" src="assets/icons/close.svg" />
+            <img
+              class="close_button"
+              aria-label="Bouton pour quitter le formulaire"
+              src="assets/icons/close.svg"
+            />
           </header>
-          <form action="#" method="post" aria-labelledby="form-title">
+          <form
+            action="#"
+            method="post"
+            aria-labelledby="form-title"
+            role="form"
+          >
             <fieldset>
               <legend id="form-title">Formulaire de contact</legend>
 
@@ -92,6 +135,7 @@
                 autocomplete="given-name"
                 required
                 aria-required="true"
+                minlength="2"
               />
 
               <!-- Nom -->
@@ -103,6 +147,7 @@
                 autocomplete="family-name"
                 required
                 aria-required="true"
+                minlength="2"
               />
 
               <!-- Email -->
@@ -126,19 +171,41 @@
               ></textarea>
 
               <!-- Bouton d'envoi -->
-              <button class="send_button">Envoyer</button>
+              <button
+                class="send_button"
+                role="button"
+                type="submit"
+                aria-label="Bouton pour envoyer le formulaire"
+              >
+                Envoyer
+              </button>
             </fieldset>
           </form>
         </div>
       </div>
       <div class="lightbox-container">
-        <div class="lightbox">
-          <img class="cross" src="assets/icons/close-large-line.svg" />
-          <img
+        <div class="lightbox" role="dialog" aria-modal="true">
+          <button
+            class="cross"
+            role="button"
+            aria-label="Bouton pour quitter la lightbox"
+          >
+            <img
+              aria-label="Fermer la lightbox"
+              src="assets/icons/close-large-line.svg"
+            />
+          </button>
+          <button
             class="left-arrow"
-            src="assets/icons/arrow-left-s-line.svg"
-            onclick=""
-          />
+            role="button"
+            aria-label="Aller au média précédent"
+          >
+            <img
+              class="left-arrow"
+              src="assets/icons/arrow-left-s-line.svg"
+              onclick=""
+            />
+          </button>
           <div class="lightbox-media">
             <div class="img-container">
               <img id="current-media" src="" alt="" />
@@ -148,11 +215,17 @@
               <p class="lightbox-media-title"></p>
             </div>
           </div>
-          <img
+          <button
             class="right-arrow"
-            src="assets/icons/arrow-right-s-line.svg"
-            onclick=""
-          />
+            role="button"
+            aria-label="Aller au média suivant"
+          >
+            <img
+              class="right-arrow"
+              src="assets/icons/arrow-right-s-line.svg"
+              onclick=""
+            />
+          </button>
         </div>
       </div>
     </main>

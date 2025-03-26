@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+button {
+  font-family: "DM Sans", sans-serif;
+}
+
 header {
   display: flex;
   flex-direction: row;

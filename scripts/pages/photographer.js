@@ -127,6 +127,30 @@ function addLightboxEvents(media, photographer) {
       currentIndex = index;
       lightbox.style.display = "flex"; // Affiche la lightbox
 
+      const contactButton = document.querySelector(".contact_button");
+      const logoLink = document.querySelector(".home-link");
+      const dropdownButtons = document.querySelectorAll(".sort");
+
+      // Toggle aria-hidden sur le logo
+      logoLink.setAttribute(
+        "aria-hidden",
+        logoLink.getAttribute("aria-hidden") === "true" ? "false" : "true"
+      );
+
+      // Toggle aria-hidden sur le bouton de contact
+      contactButton.setAttribute(
+        "aria-hidden",
+        contactButton.getAttribute("aria-hidden") === "true" ? "false" : "true"
+      );
+
+      // Toggle aria-hidden sur chaque bouton de dropdown
+      dropdownButtons.forEach((button) => {
+        button.setAttribute(
+          "aria-hidden",
+          button.getAttribute("aria-hidden") === "true" ? "false" : "true"
+        );
+      });
+
       // Mise à jour du média en fonction de l'élément cliqué
       updateLightboxMedia(
         photographer,
@@ -233,7 +257,7 @@ function displayPhotographerData(photographer) {
 
   // Créer et ajouter les éléments de la page
   photographeInfo.innerHTML = `
-    <h2 aria-label="Nom du photographe">${name}</h2>
+    <h1 aria-label="Nom du photographe">${name}</h1>
     <p class="location" aria-label="Localisation du photographe">${city}, ${country}</p>
     <p class="tagline" aria-label="Phrase d'accroche du photographe">${tagline}</p>
   `;
@@ -290,7 +314,7 @@ function displayPhotographerMedias(media, photographer) {
     likes.textContent = item.likes;
     totalLikes += item.likes;
 
-    heart.addEventListener("click", () => {
+    likesContainer.addEventListener("click", () => {
       if (liked) {
         likes.textContent = parseInt(likes.textContent) - 1;
         heart.classList.remove("liked");
@@ -327,4 +351,8 @@ dropdownMenu.addEventListener("click", () => {
     element.style.display = element.style.display === "flex" ? "none" : "flex";
   });
   arrow.classList.toggle("rotate");
+  dropdownMenu.setAttribute(
+    "aria-expanded",
+    dropdownMenu.ariaExpanded === "true" ? "false" : "true"
+  );
 });
