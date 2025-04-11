@@ -1,3 +1,5 @@
+import { trapFocus } from "../utils/trapFocus.js";
+
 let media = []; // Variable globale pour stocker les médias
 let photographer = null; // Variable globale pour le photographe
 
@@ -112,7 +114,9 @@ dropdownMenu.addEventListener("click", () => {
 
 // Fonction pour ajouter les événements de la lightbox
 function addLightboxEvents(media, photographer) {
+  const main = document.querySelector("main");
   const lightbox = document.querySelector(".lightbox-container");
+
   const mediaItems = document.querySelectorAll(
     ".media-item img, .media-item video"
   );
@@ -127,29 +131,14 @@ function addLightboxEvents(media, photographer) {
       currentIndex = index;
       lightbox.style.display = "flex"; // Affiche la lightbox
 
-      const contactButton = document.querySelector(".contact_button");
-      const logoLink = document.querySelector(".home-link");
-      const dropdownButtons = document.querySelectorAll(".sort");
+      // Gestion du aria-hidden
+      lightbox.setAttribute("aria-hidden", "false");
+      main.setAttribute("aria-hidden", "true");
 
-      // Toggle aria-hidden sur le logo
-      logoLink.setAttribute(
-        "aria-hidden",
-        logoLink.getAttribute("aria-hidden") === "true" ? "false" : "true"
-      );
+      lightbox.setAttribute("tabindex", "-1");
+      lightbox.focus();
 
-      // Toggle aria-hidden sur le bouton de contact
-      contactButton.setAttribute(
-        "aria-hidden",
-        contactButton.getAttribute("aria-hidden") === "true" ? "false" : "true"
-      );
-
-      // Toggle aria-hidden sur chaque bouton de dropdown
-      dropdownButtons.forEach((button) => {
-        button.setAttribute(
-          "aria-hidden",
-          button.getAttribute("aria-hidden") === "true" ? "false" : "true"
-        );
-      });
+      trapFocus(lightbox);
 
       // Mise à jour du média en fonction de l'élément cliqué
       updateLightboxMedia(
@@ -222,8 +211,18 @@ const close = document.querySelector(".cross");
 close.addEventListener("click", closeLightbox);
 
 function closeLightbox() {
+  const main = document.querySelector("main");
   const lightbox = document.querySelector(".lightbox-container");
   lightbox.style.display = "none";
+
+  trapFocus(lightbox);
+
+  if (lightbox._removeFocusTrap) {
+    lightbox._removeFocusTrap();
+  }
+
+  lightbox.setAttribute("aria-hidden", "true");
+  main.setAttribute("aria-hidden", "false");
 }
 
 // Récupérer les informations du photographe depuis un fichier JSON
@@ -289,9 +288,11 @@ function displayPhotographerMedias(media, photographer) {
       const img = document.createElement("img");
       img.src = `../assets/media/${photographerName}/${item.image}`;
       img.alt = item.title;
+      img.setAttribute("tabindex", "0");
       mediaElement.appendChild(img);
     } else if (item.video) {
       const video = document.createElement("video");
+      video.setAttribute("tabindex", "0");
       video.src = `../assets/media/${photographerName}/${item.video}`;
       mediaElement.appendChild(video);
     }
