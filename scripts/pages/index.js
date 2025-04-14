@@ -1,27 +1,25 @@
-import { photographerTemplate } from "../templates/photographer.js";
+import PhotographersApi from "../api/Api.js";
+import photographerFactory from "../factories/photographer.js";
+import PhotographerCard from "../templates/PhotographerCard.js";
 
-async function getPhotographers() {
-  // Récupération des pièces depuis le fichier JSON
-  const reponse = await fetch("../data/photographers.json");
-  const photographers = await reponse.json();
-  console.log(photographers);
-  return photographers;
+class Index {
+  constructor() {
+    this.photographersSection = document.querySelector(".photographer_section");
+    this.photographersApi = new PhotographersApi("./data/photographers.json");
+  }
+
+  // Initialisation de la page principale
+
+  async init() {
+    const photographersData = await this.photographersApi.getPhotographers();
+    photographersData.photographers.forEach((photographer) => {
+      const photographerModel = photographerFactory(photographer);
+      const photographerCardItem = new PhotographerCard(photographerModel);
+      const photographerCard = photographerCardItem.getPhotographerCard();
+      this.photographersSection.appendChild(photographerCard);
+    });
+  }
 }
 
-async function displayData(photographers) {
-  const photographersSection = document.querySelector(".photographer_section");
-
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerTemplate(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-  });
-}
-
-async function init() {
-  // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
-  displayData(photographers);
-}
-
-init();
+const index = new Index();
+index.init();

@@ -1,4 +1,4 @@
-import { trapFocus } from "./trapFocus.js";
+import { trapFocus } from "../utils/trapFocus.js";
 
 const contactButton = document.querySelector(".contact_button");
 const logoLink = document.querySelector(".home-link");
@@ -75,4 +75,36 @@ form.addEventListener("submit", (e) => {
   console.log(baliseNom.value);
   console.log(baliseEmail.value);
   console.log(baliseMessage.value);
+
+  form.reset();
+
+  formValidation();
 });
+
+function formValidation() {
+  const sendSection = document.querySelector(".send-section");
+  const validation = document.createElement("div");
+
+  // Vérifie si un message de validation est déjà présent
+  if (sendSection.querySelector(".validation")) return;
+
+  validation.classList.add("validation", "fade-in");
+  validation.innerHTML = `
+  <div class="validation-message">
+    <p>Formulaire envoyé</p>
+  </div>
+  `;
+
+  sendSection.appendChild(validation);
+
+  // Supprimer après 3 secondes avec effet
+  setTimeout(() => {
+    validation.classList.remove("fade-in");
+    validation.classList.add("fade-out");
+
+    // Attendre l'animation de disparition avant suppression
+    setTimeout(() => {
+      validation.remove();
+    }, 600);
+  }, 3000);
+}

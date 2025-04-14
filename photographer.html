@@ -121,7 +121,13 @@
             />
           </button>
         </header>
-        <form action="#" method="post" aria-labelledby="form-title" role="form">
+        <form
+          action="#"
+          method="post"
+          aria-labelledby="form-title"
+          role="form"
+          autocomplete="on"
+        >
           <fieldset>
             <legend id="form-title">Formulaire de contact</legend>
 
@@ -170,14 +176,16 @@
             ></textarea>
 
             <!-- Bouton d'envoi -->
-            <button
-              class="send_button"
-              role="button"
-              type="submit"
-              aria-label="Bouton pour envoyer le formulaire"
-            >
-              Envoyer
-            </button>
+            <div class="send-section">
+              <button
+                class="send_button"
+                role="button"
+                type="submit"
+                aria-label="Bouton pour envoyer le formulaire"
+              >
+                Envoyer
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>
@@ -230,6 +238,6 @@
     </div>
 
     <script type="module" src="scripts/pages/photographer.js"></script>
-    <script type="module" src="scripts/utils/contactForm.js"></script>
+    <script type="module" src="scripts/components/contactForm.js"></script>
   </body>
 </html>
