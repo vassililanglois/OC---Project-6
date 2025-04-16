@@ -140,3 +140,27 @@ likeButtons.forEach((button) => {
     button.setAttribute("aria-pressed", !isPressed);
   });
 });
+
+// Responsive de l'intitulé du photograhe
+
+function handleResponsiveHeader() {
+  const photographHeader = document.querySelector(".photograph-header");
+
+  if (window.innerWidth <= 1024) {
+    // Changer l'ordre des élements
+    const info = document.querySelector(".photographe-info");
+    const portrait = document.querySelector(".emplacement-portrait");
+    const button = document.querySelector(".contact_button");
+
+    photographHeader.innerHTML = ""; // Vider le conteneur
+    photographHeader.appendChild(portrait);
+    photographHeader.appendChild(info);
+    photographHeader.appendChild(button);
+  }
+}
+
+// Ajouter un écouteur pour surveiller les changements de taille de la fenêtre
+window.addEventListener("resize", handleResponsiveHeader);
+
+// Appeler la fonction au chargement initial
+handleResponsiveHeader();

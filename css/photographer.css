@@ -349,10 +349,6 @@ form textarea {
   transition: transform 100ms ease-in-out;
 }
 
-.dropdown-menu:hover {
-  transform: scale(1.05);
-}
-
 svg {
   width: 32px;
 }
@@ -412,6 +408,8 @@ svg {
   align-items: center;
   gap: 0px;
   transition: transform 200ms ease-in-out;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .media-item:hover {
@@ -541,4 +539,68 @@ svg {
   color: #901c1c;
   font-size: 1.5rem;
   margin-top: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .photograph-header {
+    grid-template-columns: 1fr;
+
+    margin-bottom: 2rem;
+  }
+
+  .photographe-info {
+    text-align: center;
+  }
+
+  .emplacement-portrait {
+    margin-top: 1rem;
+  }
+
+  .contact_button {
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+
+  .media-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    justify-content: center;
+  }
+
+  .logo {
+    margin-left: 0;
+  }
+
+  .photograph-header {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .media-container {
+    margin-right: 3rem;
+    margin-left: 3rem;
+  }
+
+  .filters {
+    margin: 10px 3rem;
+  }
+
+  .media-infos {
+    font-size: 1rem;
+  }
+
+  .likes-and-price {
+    gap: 1rem;
+    width: fit-content;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .media-container {
+    grid-template-columns: 1fr;
+  }
 }
