@@ -8,7 +8,6 @@ export default class MediaCard {
     const mediaContainer = document.querySelector(".media-container");
     const photographerName = photographer.name.replace(/ /g, "-");
     const totalNumber = document.querySelector(".total-number");
-    let totalLikes = 0;
 
     media.forEach((item) => {
       const mediaElement = document.createElement("div");
@@ -33,33 +32,27 @@ export default class MediaCard {
         </div>
       `;
 
-      totalLikes += item.likes;
       mediaContainer.appendChild(mediaElement);
 
-      // Gestion du like (à faire après que le HTML a été injecté)
+      // Gestion du like
       const likesContainer = mediaElement.querySelector(".likes-container");
       const likes = mediaElement.querySelector(".media-likes");
       const heart = mediaElement.querySelector(".ri-heart-fill");
 
-      let liked = false;
-
       likesContainer.addEventListener("click", () => {
         let currentLikes = parseInt(likes.textContent);
-        if (liked) {
+        const isLiked = heart.classList.contains("liked");
+
+        if (isLiked) {
           likes.textContent = currentLikes - 1;
           heart.classList.remove("liked");
-          totalLikes -= 1;
+          totalNumber.textContent = parseInt(totalNumber.textContent) - 1; // Décrémente le total global
         } else {
           likes.textContent = currentLikes + 1;
           heart.classList.add("liked");
-          totalLikes += 1;
+          totalNumber.textContent = parseInt(totalNumber.textContent) + 1; // Incrémente le total global
         }
-        liked = !liked;
-        totalNumber.textContent = totalLikes;
       });
     });
-
-    // Mise à jour globale du total
-    totalNumber.textContent = totalLikes;
   }
 }
