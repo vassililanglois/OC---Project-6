@@ -1,4 +1,5 @@
 import { media, updateMediaDisplay } from "../pages/photographer.js";
+import { trapFocus } from "../utils/trapFocus.js";
 
 // Fonctions de tri
 export function sortMediasByLikes() {
@@ -49,7 +50,6 @@ dropdownOptions.forEach((option) => {
 });
 
 // Fonction pour empecher que les click sur le dropdown-menu ouvre la vidéo
-
 const dropdownMenu = document.querySelector(".dropdown-menu");
 const videos = document.querySelectorAll(".media-container video");
 
@@ -63,6 +63,11 @@ dropdownMenu.addEventListener("click", () => {
       video.classList.remove("video-under-dropdown");
     }
   });
+  // Gestion du trapFocus sur le dropdown lorsqu'il est ouvert
+
+  if (isOpen) {
+    trapFocus(dropdownMenu);
+  }
 });
 
 // Gestion de l'affichage du menu déroulant
