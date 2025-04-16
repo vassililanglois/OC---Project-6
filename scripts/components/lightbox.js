@@ -14,30 +14,42 @@ export function addLightboxEvents(media, photographer) {
 
   let currentIndex = 0;
 
+  function openLightbox(index) {
+    currentIndex = index;
+    lightbox.style.display = "flex";
+    lightbox.setAttribute("aria-hidden", "false");
+    main.setAttribute("aria-hidden", "true");
+    lightbox.setAttribute("tabindex", "-1");
+    document.querySelector(".right-arrow").focus();
+    trapFocus(lightbox);
+
+    updateLightboxMedia(
+      photographer,
+      media,
+      currentIndex,
+      currentMedia,
+      currentMediaVideo,
+      currentMediaTitle
+    );
+  }
+
   mediaItems.forEach((item, index) => {
     item.addEventListener("click", () => {
-      currentIndex = index;
-      lightbox.style.display = "flex"; // Affiche la lightbox
-
-      // Gestion du aria-hidden
-      lightbox.setAttribute("aria-hidden", "false");
-      main.setAttribute("aria-hidden", "true");
-
-      lightbox.setAttribute("tabindex", "-1");
-      document.querySelector(".right-arrow").focus();
-
-      trapFocus(lightbox);
-
-      // Mise à jour du média en fonction de l'élément cliqué
-      updateLightboxMedia(
-        photographer,
-        media,
-        currentIndex,
-        currentMedia,
-        currentMediaVideo,
-        currentMediaTitle
-      );
+      openLightbox(index);
     });
+  });
+
+  // Ajoute aussi le keydown Enter ici (dans cette fonction pour que l'index soit correct)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const focused = document.activeElement;
+
+      // Vérifie si l'élément est dans mediaItems
+      const index = Array.from(mediaItems).indexOf(focused);
+      if (index !== -1) {
+        openLightbox(index);
+      }
+    }
   });
 
   // Flèches de navigation dans la lightbox
@@ -86,20 +98,6 @@ document.addEventListener("keydown", (e) => {
     document.activeElement.classList.contains("likes-container")
   ) {
     document.activeElement.click();
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const focused = document.activeElement;
-
-    // Si l'élément focusé est une image ou une vidéo dans un media-item
-    if (
-      focused.matches(".media-item img") ||
-      focused.matches(".media-item video")
-    ) {
-      focused.click();
-    }
   }
 });
 
