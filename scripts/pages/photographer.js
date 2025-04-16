@@ -126,3 +126,17 @@ function displayPhotographerMedias(media, photographer) {
   // Mettre à jour le total des likes
   totalNumber.textContent = totalLikes;
 }
+
+// Gestion de aria-pressed sur les boutons de likes
+
+const likeButtons = document.querySelectorAll(".likes-container button");
+
+likeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Vérifier l'état actuel de aria-pressed
+    const isPressed = button.getAttribute("aria-pressed") === "true";
+
+    // Inverser l'état de aria-pressed
+    button.setAttribute("aria-pressed", !isPressed);
+  });
+});

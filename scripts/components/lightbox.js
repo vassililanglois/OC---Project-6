@@ -33,23 +33,22 @@ export function addLightboxEvents(media, photographer) {
     );
   }
 
+  // Ouverture de la lightbox avec le click
+
   mediaItems.forEach((item, index) => {
     item.addEventListener("click", () => {
       openLightbox(index);
     });
   });
 
-  // Ajoute aussi le keydown Enter ici (dans cette fonction pour que l'index soit correct)
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const focused = document.activeElement;
+  // Ouverture de la lightbox avec la touche "Enter"
 
-      // Vérifie si l'élément est dans mediaItems
-      const index = Array.from(mediaItems).indexOf(focused);
-      if (index !== -1) {
-        openLightbox(index);
+  mediaItems.forEach((item, index) => {
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        openLightbox(index - 1);
       }
-    }
+    });
   });
 
   // Flèches de navigation dans la lightbox

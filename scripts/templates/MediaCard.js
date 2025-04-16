@@ -26,7 +26,7 @@ export default class MediaCard {
         ${mediaTag}
         <div class="media-infos">
           <p class="media-title">${item.title}</p>
-          <div class="likes-container" tabindex="0">
+          <div class="likes-container" tabindex="0" aria-pressed="false" aria-label="Bouton pour liker le média">
             <p class="media-likes">${item.likes}</p>
             <i class="ri-heart-fill"></i>
           </div>
