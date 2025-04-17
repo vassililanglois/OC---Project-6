@@ -2,9 +2,13 @@ import { sortMediasByLikes } from "../components/dropdown.js";
 import { addLightboxEvents } from "../components/lightbox.js";
 import photographerMediaFactory from "../factories/media.js";
 import MediaCard from "../templates/MediaCard.js";
+import PhotographersApi from "../api/Api.js";
 
 export let media = []; // Variable globale pour stocker les médias
 let photographer = null; // Variable globale pour le photographe
+
+// Instance de l'API
+const photographersApi = new PhotographersApi("../data/photographers.json");
 
 // Fonction appelée dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,24 +17,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (photographerId) {
     try {
-      // Récupération des informations du photographe et des médias
-      const data = await getPhotographerInfos(photographerId);
-      photographer = data.photographer;
-      media = data.media;
+      // Récupération des informations du photographe et des médias via l'API
+      photographer = await photographersApi.getPhotographer(photographerId);
+      media = await photographersApi.getMediasByPhotographerId(photographerId);
 
-      if (photographer) {
-        console.log("Photographe trouvé:", photographer);
+      if (photographer.length > 0) {
+        console.log("Photographe trouvé:", photographer[0]);
         console.log("Médias trouvés", media);
 
         // Affichage des informations du photographe et des médias
-        displayPhotographerData(photographer);
-        displayPhotographerMedias(media, photographer);
+        displayPhotographerData(photographer[0]);
+        displayPhotographerMedias(media, photographer[0]);
 
         // Tri par popularité par défaut
         sortMediasByLikes();
 
         // Ajouter les événements de lightbox
-        addLightboxEvents(media, photographer);
+        addLightboxEvents(media, photographer[0]);
       } else {
         console.error("Photographe non trouvé");
       }
@@ -46,26 +49,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 export function updateMediaDisplay() {
   const mediaContainer = document.querySelector(".media-container");
   mediaContainer.innerHTML = ""; // Vide le conteneur avant de réafficher
-  displayPhotographerMedias(media, photographer); // Réaffiche les médias
-  addLightboxEvents(media, photographer); // Réajoute les événements pour la lightbox
-}
-
-// Récupérer les informations du photographe depuis un fichier JSON
-async function getPhotographerInfos(id) {
-  try {
-    const response = await fetch("../data/photographers.json");
-    const data = await response.json();
-
-    const photographer = data.photographers.find((p) => p.id == id);
-    const media = data.media.filter((m) => m.photographerId == id); // Filtrer les médias du photographe
-
-    return { photographer, media };
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des informations du photographe:",
-      error
-    );
-  }
+  displayPhotographerMedias(media, photographer[0]); // Réaffiche les médias
+  addLightboxEvents(media, photographer[0]); // Réajoute les événements pour la lightbox
 }
 
 // Afficher les données du photographe (nom, portrait, ville, etc.)
@@ -86,8 +71,7 @@ function displayPhotographerData(photographer) {
     <p class="tagline" aria-label="Phrase d'accroche du photographe">${tagline}</p>
   `;
 
-  // Afficher le prix journalier du photgraphe
-
+  // Afficher le prix journalier du photographe
   const photographerPrice = document.querySelector(".photographer-price");
   photographerPrice.textContent = `${price}€/jour`;
 
@@ -128,7 +112,6 @@ function displayPhotographerMedias(media, photographer) {
 }
 
 // Gestion de aria-pressed sur les boutons de likes
-
 const likeButtons = document.querySelectorAll(".likes-container button");
 
 likeButtons.forEach((button) => {
@@ -141,13 +124,12 @@ likeButtons.forEach((button) => {
   });
 });
 
-// Responsive de l'intitulé du photograhe
-
+// Responsive de l'intitulé du photographe
 function handleResponsiveHeader() {
   const photographHeader = document.querySelector(".photograph-header");
 
   if (window.innerWidth <= 1024) {
-    // Changer l'ordre des élements
+    // Changer l'ordre des éléments
     const info = document.querySelector(".photographe-info");
     const portrait = document.querySelector(".emplacement-portrait");
     const button = document.querySelector(".contact_button");

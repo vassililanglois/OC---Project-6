@@ -409,7 +409,6 @@ svg {
   gap: 0px;
   transition: transform 200ms ease-in-out;
   max-width: 100%;
-  overflow: hidden;
 }
 
 .media-item:hover {
@@ -541,6 +540,20 @@ svg {
   margin-top: 3rem;
 }
 
+@media (max-width: 1200px) {
+  .modal header h2 {
+    font-size: 3rem;
+  }
+
+  .modal label {
+    font-size: 2rem;
+  }
+
+  .modal {
+    width: 70%;
+  }
+}
+
 @media (max-width: 1024px) {
   .photograph-header {
     grid-template-columns: 1fr;
@@ -597,10 +610,54 @@ svg {
     width: fit-content;
     right: 1rem;
   }
+
+  /***** Modale de contact *****/
+
+  .modal {
+    width: 80%;
+  }
+
+  .modal header h2 {
+    font-size: 2rem;
+  }
+
+  .modal header img {
+    width: 2rem;
+  }
+
+  .modal label {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+  }
+
+  .modal input {
+    height: 3rem;
+  }
+
+  #message {
+    height: 8rem;
+  }
+
+  .send_button {
+    font-size: 1rem;
+    min-width: 0px;
+    width: 8rem;
+    height: 3rem;
+  }
 }
 
 @media (max-width: 425px) {
   .media-container {
     grid-template-columns: 1fr;
+  }
+
+  /***** Modale de contact *****/
+
+  .modal header h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal header img {
+    width: 1rem;
   }
 }
