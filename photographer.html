@@ -31,10 +31,9 @@
         <p class="photographer-price"></p>
       </div>
     </div>
-    <header role="banner">
+    <header>
       <a
         href="index.html"
-        role="link"
         aria-label="Lien vers la page d'accueil"
         aria-hidden="false"
         class="home-link"
@@ -42,16 +41,12 @@
         <img src="assets/images/logo.png" class="logo" alt="Logo Fisheye" />
       </a>
     </header>
-    <main id="main" role="main">
+    <main id="main">
       <section class="photograph-header" role="banner">
-        <div
-          class="photographe-info photograph-header-element"
-          aria-label="Informations du photographe"
-        ></div>
+        <div class="photographe-info photograph-header-element"></div>
         <div class="photograph-header-element">
           <button
             class="contact_button"
-            role="dialog"
             aria-hidden="false"
             aria-label="Bouton pour ouvrir le formulaire de contact"
           >
@@ -71,8 +66,6 @@
           >
             <button
               class="sort current"
-              role="button"
-              aria-sort="descending"
               aria-label="Trier par popularité décroissante"
               aria-hidden="false"
             >
@@ -90,8 +83,6 @@
             </button>
             <button
               class="sort other"
-              role="button"
-              aria-sort="descending"
               aria-label="Trier par date décroissante"
               aria-hidden="false"
             >
@@ -99,8 +90,6 @@
             </button>
             <button
               class="sort other"
-              role="button"
-              aria-sort="ascending"
               aria-label="Trier par titre par ordre alphabétique"
               aria-hidden="false"
             >
@@ -113,7 +102,7 @@
     </main>
     <div id="contact_modal">
       <div class="modal" aria-modal="true" role="dialog">
-        <header role="Présentation du photographe et bouton de contact">
+        <header aria-label="Présentation du photographe et bouton de contact">
           <h2>
             Contactez-moi <br />
             <span class="contact-name"></span>
@@ -130,7 +119,6 @@
           action="#"
           method="post"
           aria-labelledby="form-title"
-          role="form"
           autocomplete="on"
         >
           <fieldset>
@@ -184,7 +172,6 @@
             <div class="send-section">
               <button
                 class="send_button"
-                role="button"
                 type="submit"
                 aria-label="Bouton pour envoyer le formulaire"
               >
@@ -197,22 +184,14 @@
     </div>
     <div class="lightbox-container">
       <div class="lightbox" role="dialog" aria-modal="true">
-        <button
-          class="cross"
-          role="button"
-          aria-label="Bouton pour quitter la lightbox"
-        >
+        <button class="cross" aria-label="Bouton pour quitter la lightbox">
           <img
             aria-label="Fermer la lightbox"
             src="assets/icons/close-large-line.svg"
             alt="Bouton fermer en forme de croix"
           />
         </button>
-        <button
-          class="left-arrow"
-          role="button"
-          aria-label="Aller au média précédent"
-        >
+        <button class="left-arrow" aria-label="Aller au média précédent">
           <img
             class="left-arrow"
             src="assets/icons/arrow-left-s-line.svg"
@@ -221,18 +200,14 @@
         </button>
         <div class="lightbox-media">
           <div class="img-container">
-            <img id="current-media" src="" alt="" />
-            <video id="current-media-video" src="" alt=""></video>
+            <img id="current-media" />
+            <video id="current-media-video"></video>
           </div>
           <div>
             <p class="lightbox-media-title"></p>
           </div>
         </div>
-        <button
-          class="right-arrow"
-          role="button"
-          aria-label="Aller au média suivant"
-        >
+        <button class="right-arrow" aria-label="Aller au média suivant">
           <img
             class="right-arrow"
             src="assets/icons/arrow-right-s-line.svg"
